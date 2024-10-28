@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Function to render a single bed card
     function renderBedCard(bed) {
+        console.log("Rendering bed:", bed); // Check if price exists on each bed object
         const bedCard = `
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
@@ -47,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     <div class="card-body">
                         <h5 class="card-title">${bed.name}</h5>
                         <p class="card-text">${bed.description}</p>
+                        <p class="card-text"><strong>Price: $${bed.price !== undefined ? bed.price : 'N/A'}</strong></p>
                     </div>
                     <div class="card-footer text-center">
                         <button class="btn btn-dark add-to-cart-btn" data-id="${bed.id}">Add to Cart</button>
@@ -57,16 +59,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         bedsContainer.insertAdjacentHTML('beforeend', bedCard);
     }
     
+    
+    // Load beds data and handle merging with local storage
     const databaseBeds = await loadBedsFromDatabase();
     const mergedBeds = mergeBedData(localBeds, databaseBeds);
-    
+
     // Update localStorage with merged beds
     localStorage.setItem('beds', JSON.stringify(mergedBeds));
     
     // Render the merged list of beds
     renderBeds(mergedBeds);
 });
-
 
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('add-to-cart-btn')) {
@@ -78,10 +81,30 @@ document.addEventListener('click', function (event) {
 // Function to add bed to cart
 function addToCart(bedId) {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const bed = JSON.parse(localStorage.getItem('beds')).find(b => b.id === bedId);
+    const beds = JSON.parse(localStorage.getItem('beds'));
+    const bed = beds.find(b => b.id === parseInt(bedId));
+
     if (bed) {
         cart.push(bed);
         localStorage.setItem('cart', JSON.stringify(cart));
         alert(`${bed.name} has been added to your cart!`);
+    } else {
+        console.error(`Bed with ID ${bedId} not found in localStorage.`);
     }
+}
+
+function mergeBedData(localBeds, databaseBeds) {
+    const mergedBeds = [...localBeds];
+    const localBedIds = new Set(localBeds.map(bed => bed.id));
+
+    databaseBeds.forEach(bed => {
+        if (!localBedIds.has(bed.id)) {
+            mergedBeds.push(bed);
+        }
+    });
+
+    // Log merged beds to check if `price` exists
+    console.log("Merged Beds Data:", mergedBeds);
+
+    return mergedBeds;
 }

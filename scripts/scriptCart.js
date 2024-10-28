@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class="card-body">
                             <h5 class="card-title">${bed.name}</h5>
                             <p class="card-text">${bed.description}</p>
+                            <p class="card-text"><strong>Price: $${bed.price !== undefined ? bed.price : 'N/A'}</strong></p>
                         </div>
                         <div class="card-footer text-center">
                             <button class="btn btn-danger remove-from-cart-btn" data-index="${index}">Remove from Cart</button>

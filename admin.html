@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Beds</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script defer src="scripts/scriptAdmin.js"></script>
+    <style>
+        .catalog-card {
+            height: 340px;
+            width: 100%;
+            object-fit: cover; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Manage Beds</h1>
+
+        <div class="container">
+            <h1 class="mt-5">Admin Panel</h1>
+            <form id="addBedForm" class="mt-4">
+                <input type="hidden" id="bedId">
+                <div class="form-group">
+                    <label for="bedName">Bed Name</label>
+                    <input type="text" id="bedName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="bedDescription">Description</label>
+                    <textarea id="bedDescription" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="bedPrice">Price</label>
+                    <input type="number" id="bedPrice" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="bedImage">Image URL</label>
+                    <input type="text" id="bedImage" class="form-control" placeholder="Enter image URL" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Add/Update Bed</button>
+            </form>
+            <h2 class="mt-5">Bed Catalog</h2>
+            <div id="bedCatalog" class="row mt-3"></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
