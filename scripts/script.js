@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const bedCard = `
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <img src="${bed.image}" alt="${bed.name}" class="card-img-top img-fluid rounded" />
+                    <img src="${bed.image}" alt="${bed.name}" class="card-img-top img-fluid rounded catalog-card" />
                     <div class="card-body">
                         <h5 class="card-title">${bed.name}</h5>
                         <p class="card-text">${bed.description}</p>
@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         `;
         bedsContainer.insertAdjacentHTML('beforeend', bedCard);
     }
+    
+    
     
     const databaseBeds = await loadBedsFromDatabase();
     const mergedBeds = mergeBedData(localBeds, databaseBeds);
