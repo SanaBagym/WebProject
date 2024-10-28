@@ -1,0 +1,22 @@
+[
+    { "id": 1, "name": "Stylish and Safe", "image": "images/photo1.jpeg", "description": "A stylish and safe bed for children." },
+    { "id": 2, "name": "Comfortable and Durable", "image": "images/photo2.jpeg", "description": "Comfortable bed that lasts for years." },
+    { "id": 3, "name": "Modern and Cozy", "image": "images/photo3.jpeg", "description": "A modern, cozy bed for a comfortable sleep." },
+    { "id": 4, "name": "Rustic Charm", "image": "images/photo4.jpeg", "description": "A rustic bed with a natural wood finish." },
+    { "id": 5, "name": "Classic Elegance", "image": "images/photo5.jpeg", "description": "Classic bed design with elegant features." },
+    { "id": 6, "name": "Space Saver", "image": "images/photo6.jpeg", "description": "Compact bed perfect for small spaces." },
+    { "id": 7, "name": "Luxury Comfort", "image": "images/photo7.jpeg", "description": "A luxurious bed with premium features." },
+    { "id": 8, "name": "Modern Minimalist", "image": "images/photo8.jpeg", "description": "Sleek, minimalist design for modern homes." },
+    { "id": 9, "name": "Nature's Touch", "image": "images/photo9.jpeg", "description": "Eco-friendly bed made from natural materials." },
+    { "id": 10, "name": "Elegant Storage Bed", "image": "images/photo10.jpeg", "description": "Stylish bed with built-in storage." },
+    { "id": 11, "name": "Scandinavian Style", "image": "images/photo11.jpeg", "description": "Simple and cozy Scandinavian bed." },
+    { "id": 12, "name": "Vintage Dreams", "image": "images/photo12.jpeg", "description": "Vintage bed design with timeless appeal." },
+    { "id": 13, "name": "Functional Bunk Bed", "image": "images/photo13.jpeg", "description": "Bunk bed designed for functionality and fun." },
+    { "id": 14, "name": "Loft Bed with Desk", "image": "images/photo14.jpeg", "description": "Space-saving loft bed with a desk underneath." },
+    { "id": 15, "name": "Fairy Tale Bed", "image": "images/photo15.jpeg", "description": "Bed design inspired by fairy tales." },
+    { "id": 16, "name": "Floating Bed", "image": "images/photo16.jpeg", "description": "Modern bed with a floating illusion." },
+    { "id": 17, "name": "Convertible Bed", "image": "images/photo17.jpeg", "description": "Convertible bed for multiple functions." },
+    { "id": 18, "name": "Cozy Canopy", "image": "images/photo18.jpeg", "description": "Canopy bed for a cozy, dreamy vibe." },
+    { "id": 19, "name": "Urban Chic", "image": "images/photo19.jpeg", "description": "A bed with an urban, chic design." },
+    { "id": 20, "name": "Eco Bamboo", "image": "images/photo20.jpeg", "description": "Eco-friendly bed made from sustainable bamboo." }
+]
