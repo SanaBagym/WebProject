@@ -48,13 +48,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                         <h5 class="card-title">${bed.name}</h5>
                         <p class="card-text">${bed.description}</p>
                     </div>
+                    <div class="card-footer text-center">
+                        <button class="btn btn-dark add-to-cart-btn" data-id="${bed.id}">Add to Cart</button>
+                    </div>
                 </div>
             </div>
         `;
         bedsContainer.insertAdjacentHTML('beforeend', bedCard);
     }
-    
-    
     
     const databaseBeds = await loadBedsFromDatabase();
     const mergedBeds = mergeBedData(localBeds, databaseBeds);
@@ -65,3 +66,22 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Render the merged list of beds
     renderBeds(mergedBeds);
 });
+
+
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('add-to-cart-btn')) {
+        const bedId = event.target.getAttribute('data-id');
+        addToCart(bedId);
+    }
+});
+
+// Function to add bed to cart
+function addToCart(bedId) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const bed = JSON.parse(localStorage.getItem('beds')).find(b => b.id === bedId);
+    if (bed) {
+        cart.push(bed);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(`${bed.name} has been added to your cart!`);
+    }
+}
