@@ -1,17 +1,23 @@
 document.addEventListener('DOMContentLoaded', function () {
     const cartContainer = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // Function to render items in the cart
     function renderCartItems() {
-        cartContainer.innerHTML = ''; // Clear previous content
+        cartContainer.innerHTML = '';
+        let totalPrice = 0;
 
         if (cart.length === 0) {
             cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+            cartCount.textContent = 0;
+            cartTotal.textContent = '$0.00';
             return;
         }
 
         cart.forEach((bed, index) => {
+            totalPrice += bed.price || 0;
+
             const cartItem = `
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
@@ -29,21 +35,19 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
             cartContainer.insertAdjacentHTML('beforeend', cartItem);
         });
+
+        cartCount.textContent = cart.length;
+        cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
     }
 
-    // Function to remove item from cart
     document.addEventListener('click', function (event) {
         if (event.target.classList.contains('remove-from-cart-btn')) {
             const index = event.target.getAttribute('data-index');
-            removeFromCart(index);
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCartItems();
         }
     });
 
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        renderCartItems(); // Re-render items
-    }
-
-    renderCartItems(); // Initial render
+    renderCartItems();
 });
