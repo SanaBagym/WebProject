@@ -1,57 +1,40 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const container = document.createElement('div');
-    container.style.margin = '20px auto';
-    container.style.width = '80%';
-    container.style.maxWidth = '500px';
-    container.style.padding = '20px';
-    container.style.border = '1px solid #ccc';
-    container.style.borderRadius = '10px';
-    container.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-    
-    const title = document.createElement('h2');
-    title.textContent = 'Create Account';
-    title.style.textAlign = 'center';
-    container.appendChild(title);
+    const formContainer = document.getElementById('form-container');
 
-    const usernameInput = document.createElement('input');
-    usernameInput.type = 'text';
-    usernameInput.placeholder = 'Username';
-    usernameInput.style.display = 'block';
-    usernameInput.style.width = '100%';
-    usernameInput.style.padding = '10px';
-    usernameInput.style.marginBottom = '10px';
-    usernameInput.style.border = '1px solid #ccc';
-    usernameInput.style.borderRadius = '5px';
-    container.appendChild(usernameInput);
+    // Create Account Section
+    const registerCard = document.createElement('div');
+    registerCard.className = 'col-md-6 mb-4';
+    registerCard.innerHTML = `
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-3">Create Account</h2>
+                <input type="text" id="register-username" class="form-control mb-3" placeholder="Username">
+                <input type="password" id="register-password" class="form-control mb-3" placeholder="Password">
+                <button id="register-btn" class="btn btn-primary btn-block">Register</button>
+            </div>
+        </div>
+    `;
+    formContainer.appendChild(registerCard);
 
-    const passwordInput = document.createElement('input');
-    passwordInput.type = 'password';
-    passwordInput.placeholder = 'Password';
-    passwordInput.style.display = 'block';
-    passwordInput.style.width = '100%';
-    passwordInput.style.padding = '10px';
-    passwordInput.style.marginBottom = '10px';
-    passwordInput.style.border = '1px solid #ccc';
-    passwordInput.style.borderRadius = '5px';
-    container.appendChild(passwordInput);
+    // Sign In Section
+    const loginCard = document.createElement('div');
+    loginCard.className = 'col-md-6 mb-4';
+    loginCard.innerHTML = `
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-3">Sign In</h2>
+                <input type="email" id="login-email" class="form-control mb-3" placeholder="Email">
+                <input type="password" id="login-password" class="form-control mb-3" placeholder="Password">
+                <button id="login-btn" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+        </div>
+    `;
+    formContainer.appendChild(loginCard);
 
-    const registerButton = document.createElement('button');
-    registerButton.textContent = 'Register';
-    registerButton.style.display = 'block';
-    registerButton.style.width = '100%';
-    registerButton.style.padding = '10px';
-    registerButton.style.backgroundColor = '#324874';
-    registerButton.style.color = '#fff';
-    registerButton.style.border = 'none';
-    registerButton.style.borderRadius = '5px';
-    registerButton.style.cursor = 'pointer';
-    container.appendChild(registerButton);
-
-    document.body.appendChild(container);
-
-    registerButton.addEventListener('click', function () {
-        const username = usernameInput.value;
-        const password = passwordInput.value;
+    // Register Button Logic
+    document.getElementById('register-btn').addEventListener('click', function () {
+        const username = document.getElementById('register-username').value;
+        const password = document.getElementById('register-password').value;
 
         const usernameRegex = /^[a-zA-Z0-9]{1,16}$/;
         if (!usernameRegex.test(username)) {
@@ -59,75 +42,28 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$/;
         if (!passwordRegex.test(password)) {
-            alert('Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character.');
+            alert('Password must include one uppercase letter, one lowercase letter, one number, and one special character, with a minimum length of 8 characters.');
             return;
         }
 
         alert('Registration successful!');
-            window.location.href = "index.html"
+        window.location.href = 'index.html';
     });
 
-    const loginContainer = document.createElement('div');
-    loginContainer.style.margin = '20px auto';
-    loginContainer.style.width = '80%';
-    loginContainer.style.maxWidth = '500px';
-    loginContainer.style.padding = '20px';
-    loginContainer.style.border = '1px solid #ccc';
-    loginContainer.style.borderRadius = '10px';
-    loginContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-
-    const loginTitle = document.createElement('h2');
-    loginTitle.textContent = 'Sign In';
-    loginTitle.style.textAlign = 'center';
-    loginContainer.appendChild(loginTitle);
-
-    const emailInput = document.createElement('input');
-    emailInput.type = 'email';
-    emailInput.placeholder = 'Email';
-    emailInput.style.display = 'block';
-    emailInput.style.width = '100%';
-    emailInput.style.padding = '10px';
-    emailInput.style.marginBottom = '10px';
-    emailInput.style.border = '1px solid #ccc';
-    emailInput.style.borderRadius = '5px';
-    loginContainer.appendChild(emailInput);
-
-    const loginPasswordInput = document.createElement('input');
-    loginPasswordInput.type = 'password';
-    loginPasswordInput.placeholder = 'Password';
-    loginPasswordInput.style.display = 'block';
-    loginPasswordInput.style.width = '100%';
-    loginPasswordInput.style.padding = '10px';
-    loginPasswordInput.style.marginBottom = '10px';
-    loginPasswordInput.style.border = '1px solid #ccc';
-    loginPasswordInput.style.borderRadius = '5px';
-    loginContainer.appendChild(loginPasswordInput);
-
-    const loginButton = document.createElement('button');
-    loginButton.textContent = 'Sign In';
-    loginButton.style.display = 'block';
-    loginButton.style.width = '100%';
-    loginButton.style.padding = '10px';
-    loginButton.style.backgroundColor = '#324874';
-    loginButton.style.color = '#fff';
-    loginButton.style.border = 'none';
-    loginButton.style.borderRadius = '5px';
-    loginButton.style.cursor = 'pointer';
-    loginContainer.appendChild(loginButton);
-
-    document.body.appendChild(loginContainer);
-
-    loginButton.addEventListener('click', function () {
-        const email = emailInput.value;
-        const password = loginPasswordInput.value;
+    // Login Button Logic
+    document.getElementById('login-btn').addEventListener('click', function () {
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
 
         if (email === 'admin@gmail.com' && password === 'admin000') {
             alert('Welcome, admin! Redirecting to admin panel...');
             window.location.href = '/admin.html';
-        } else {
+        } else if (email && password) {
             alert('Login successful!');
+        } else {
+            alert('Please enter valid email and password.');
         }
     });
 });

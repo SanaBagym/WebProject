@@ -1,27 +1,24 @@
-document.addEventListener('DOMContentLoaded', async function () {
+document.addEventListener('DOMContentLoaded', function () {
     const addBedForm = document.getElementById('addBedForm');
     const bedImageInput = document.getElementById('bedImage');
     const imagePreview = document.getElementById('imagePreview');
     const bedCatalog = document.getElementById('bedCatalog');
     let beds = JSON.parse(localStorage.getItem('beds')) || [];
 
-    bedImageInput.addEventListener('change', function () {
-        const file = bedImageInput.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-            };
-            reader.readAsDataURL(file);
+    // Preview image when URL is entered
+    bedImageInput.addEventListener('input', function () {
+        const imageUrl = bedImageInput.value;
+        if (imageUrl) {
+            imagePreview.src = imageUrl;
+            imagePreview.style.display = 'block';
         } else {
             imagePreview.style.display = 'none';
         }
     });
 
-
+    // Function to render beds in the catalog
     function renderBeds() {
-        bedCatalog.innerHTML = ''; 
+        bedCatalog.innerHTML = '';
         beds.forEach(bed => {
             const bedCard = `
                 <div class="col-md-4 mb-4" data-id="${bed.id}">
@@ -43,52 +40,47 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 
-
+    // Add/Edit Bed
     addBedForm.addEventListener('submit', function (event) {
         event.preventDefault();
         const bedId = document.getElementById('bedId').value;
         const bedName = document.getElementById('bedName').value;
         const bedDescription = document.getElementById('bedDescription').value;
         const bedPrice = document.getElementById('bedPrice').value;
-
-
-        const imageUrl = 'path/to/your/image.jpg';
+        const bedImage = bedImageInput.value; // Dynamic URL from input
 
         const bed = {
             id: bedId || Date.now().toString(),
             name: bedName,
             description: bedDescription,
             price: bedPrice,
-            image: imageUrl, 
+            image: bedImage,
         };
 
-
         if (bedId) {
-
             beds = beds.map(b => b.id === bed.id ? bed : b);
         } else {
-
             beds.push(bed);
         }
-        
+
         localStorage.setItem('beds', JSON.stringify(beds));
         renderBeds();
-        addBedForm.reset(); 
-        imagePreview.style.display = 'none'; 
+        addBedForm.reset();
+        imagePreview.style.display = 'none'; // Hide the preview
     });
 
-
+    // Remove Bed
     bedCatalog.addEventListener('click', function (event) {
         if (event.target.classList.contains('remove-bed-btn')) {
             const bedCard = event.target.closest('.col-md-4');
             const bedId = bedCard.getAttribute('data-id');
-            beds = beds.filter(b => b.id != bedId); 
+            beds = beds.filter(b => b.id != bedId);
             localStorage.setItem('beds', JSON.stringify(beds));
-            renderBeds(); 
+            renderBeds();
         }
     });
 
-
+    // Edit Bed
     bedCatalog.addEventListener('click', function (event) {
         if (event.target.classList.contains('edit-bed-btn')) {
             const bedCard = event.target.closest('.col-md-4');
@@ -100,13 +92,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                 document.getElementById('bedName').value = bedToEdit.name;
                 document.getElementById('bedDescription').value = bedToEdit.description;
                 document.getElementById('bedPrice').value = bedToEdit.price;
+                bedImageInput.value = bedToEdit.image;
 
-
+                // Show current image in preview
                 imagePreview.src = bedToEdit.image;
                 imagePreview.style.display = 'block';
             }
         }
     });
 
-    renderBeds();
+    renderBeds(); // Initial render
 });

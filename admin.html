@@ -6,8 +6,6 @@
     <title>Admin - Manage Beds</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script defer src="scripts/scriptAdmin.js"></script>
-    <script src="admin.js"></script>
-
     <style>
         .catalog-card {
             height: 340px;
@@ -40,7 +38,10 @@
                     <label for="bedImage">Image URL</label>
                     <input type="text" id="bedImage" class="form-control" placeholder="Enter image URL" required>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Add/Update Bed</button>
+                <div class="form-group">
+                    <img id="imagePreview" class="img-fluid mt-3" style="display: none; width: 100px; height: auto;" alt="Image Preview" />
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Add/Update Bed</button>                
             </form>
             <h2 class="mt-5">Bed Catalog</h2>
             <div id="bedCatalog" class="row mt-3"></div>
