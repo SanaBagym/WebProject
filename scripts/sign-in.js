@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             <button type="button" class="btn btn-primary w-100" id="registerButton">Register</button>
         </form>
+        <p class="text-center mt-3">
+            Already have an account? <a href="log-in.html">Log in here</a>
+        </p>
     `;
 
     document.getElementById('registerButton').addEventListener('click', function () {
@@ -61,3 +64,4 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = 'log-in.html';
     });
 });
+
